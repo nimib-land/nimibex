@@ -63,16 +63,19 @@ newNbBlock(NbChatBubble):
   toHtml:
     let text = markdownToHtml(blk.text)
     let flexDirection = if blk.left: "row" else: "row-reverse"
-    let wrapperStyles = &"display: flex; align-content: flex-start; align-items: center; gap: .5rem; flex-direction: {flexDirection}; margin-top: 1rem; margin-bottom: 1rem;"
+    let align = if blk.left: "left" else: "right"
+    let wrapperStyles = &"display: flex; align-content: flex-start; align-items: center; gap: .5rem; flex-direction: {flexDirection}; margin-top: 0.5rem; margin-bottom: 0.5rem;"
     let contentStyles = &"border-color: {blk.borderColor};  background-color: {blk.backgroundColor};  border-width: 1px;  margin-top: 0;  margin-bottom: 0;  max-width: 32rem;  border-radius: .75rem;  padding-top: 0; padding-bottom: 0; padding-left: .75rem; padding-right: .75rem;"
     withNewlines:
       hlHtmlF"""<div class="nimib-chat-bubble" style="{wrapperStyles}">"""
-      if blk.name.len > 0:
-        hlHtmlF"""<span>{blk.name}</span>"""
       if blk.image.len > 0:
         hlHtmlF"""<img src="{blk.image}" style="height: 32px; width: auto; image-fit: contain;"/>"""
-      hlHtmlF""" <div style="{contentStyles}">"""
+      hlHtml""" <div style="display:flex; flex-direction: column;">"""
+      if blk.name.len > 0:
+        hlHtmlF"""<span style="text-align: {align}"><i>{blk.name}</i></span>"""
+      hlHtmlF"""  <div style="{contentStyles}">"""
       text
+      "   </div>"
       " </div>"
       "</div>"
 
