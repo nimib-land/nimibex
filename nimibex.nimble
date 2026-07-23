@@ -14,3 +14,7 @@ requires "nimib >= 0.4.1"
 
 dev:
   requires "nimibook >= 0.4.0"
+
+task buildBook, "Builds the nimiBook docs":
+  selfExec(" r nbook.nim init")
+  selfExec(" r nbook.nim build")
