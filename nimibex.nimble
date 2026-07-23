@@ -18,3 +18,16 @@ dev:
 task buildBook, "Builds the nimiBook docs":
   selfExec(" r nbook.nim init")
   selfExec(" r nbook.nim build")
+
+proc listFilesRec(dir: string): seq[string] =
+  for f in listFiles(dir):
+    if f.endsWith(".nim"):
+      result.add(f)
+  for subdir in listDirs(dir):
+    result.add(listFilesRec(subdir))
+
+task docs, "Generate automatic docs":
+  for path in listFilesRec("src"):
+    if path.endsWith(".nim"):
+      selfExec " doc --index:on --git.url:https://github.com/nimib-land/nimibex --git.commit:main --outdir:docs/docs " & path
+  selfExec " buildIndex -o:docs/docs/index.html docs/docs"
