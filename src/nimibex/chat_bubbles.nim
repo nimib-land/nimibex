@@ -53,6 +53,8 @@ type
 
 # TODO: neon colors? animation?
 
+# TODO: Should the magrin depend on if there is a name? name -> no top margin
+
 newNbBlock(NbChatBubble):
   text: string
   name: string
@@ -64,13 +66,17 @@ newNbBlock(NbChatBubble):
     let text = markdownToHtml(blk.text)
     let flexDirection = if blk.left: "row" else: "row-reverse"
     let align = if blk.left: "left" else: "right"
-    let wrapperStyles = &"display: flex; align-content: flex-start; align-items: center; gap: .5rem; flex-direction: {flexDirection}; margin-top: 0.5rem; margin-bottom: 0.5rem;"
+    let wrapperStyles = &"display: flex; align-content: flex-start; align-items: center; gap: .5rem; flex-direction: {flexDirection}; margin-bottom: 0.5rem;"
     let contentStyles = &"border-color: {blk.borderColor};  background-color: {blk.backgroundColor};  border-width: 1px;  margin-top: 0;  margin-bottom: 0;  max-width: 32rem;  border-radius: .75rem;  padding-top: 0; padding-bottom: 0; padding-left: .75rem; padding-right: .75rem;"
+    let imageStyles = "height: 32px; width: auto; image-fit: contain;"
+    let columnStyles = "display:flex; flex-direction: column;"
     withNewlines:
       hlHtmlF"""<div class="nimib-chat-bubble" style="{wrapperStyles}">"""
+      
       if blk.image.len > 0:
-        hlHtmlF"""<img src="{blk.image}" style="height: 32px; width: auto; image-fit: contain;"/>"""
-      hlHtml""" <div style="display:flex; flex-direction: column;">"""
+        hlHtmlF"""<img src="{blk.image}" style="{imageStyles}"/>"""
+      
+      hlHtmlF""" <div style="{columnStyles}">"""
       if blk.name.len > 0:
         hlHtmlF"""<span style="text-align: {align}"><i>{blk.name}</i></span>"""
       hlHtmlF"""  <div style="{contentStyles}">"""
