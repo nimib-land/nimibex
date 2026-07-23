@@ -1,0 +1,27 @@
+# build docs and uploads saves output as artifact for netlify_deploy_preview pipeline to be used
+name: netlify_build_docs
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: apt install
+        run: sudo apt install -y libpcre3 libblas-dev liblapack-dev
+      - uses: actions/checkout@v2
+      - name: install nim
+        id: install_nim
+        uses: iffy/install-nim@v5
+      - name: install library dependencies
+        run: nimble sync -y && nimble setup
+      - name: build docs
+        run: nimble buildBook
+      - run: echo Commit hash = ${{ github.event.pull_request.head.sha }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ github.event.pull_request.head.sha }}
+          path: docs/
+          retention-days: 1
+          if-no-files-found: error
