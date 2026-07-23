@@ -7,53 +7,13 @@ func washColor*(c: Color, factor: float = 0.7): Color =
   ## Increase brightness and move towards white (less saturation)
   c.mix(colWhite, (x: int, y: int) => int((1-factor) * x.float + factor * y.float))
 
-discard hlHtml"""
-<style>
-.nimib-chat-bubble {
-  display: flex;
-  flex-direction: row; /* image first */
-  flex-direction: row-reverse; /* image last */
-  align-content: flex-start;
-  align-items: flex-start;
-  gap: .5rem;
-}
-
-/* add styling to the parahraph as well*/ 
-p {
-  border-color: grey;
-  background-color: darken(grey, 70%);
-  border-width: 1px;
-  margin-top: 0;
-  margin-bottom: 0;
-  max-width: 32rem;
-  border-radius: .75rem;
-  padding-top: .5rem;
-  padding-bottom: .5rem;
-  padding-left: .75rem;
-  padding-right: .75rem;
-}
-</style>
-
-<div class="nimib-chat-bubble">
-  <img src="character.svg"/>
-  <p>Content</p>
-</div>
-"""
-
 type
   ChatBubbleCharacter* = object
     name*: string
     image*: string
     left*: bool
-    borderColor*: Color # TODO: replace with color object
+    borderColor*: Color
     backgroundColor*: Color
-
-# can this be run in an init template instead?
-# Or is it enough that you have to import each block separatly. Then you don't get any unneccery blocks!
-
-# TODO: neon colors? animation?
-
-# TODO: Should the magrin depend on if there is a name? name -> no top margin
 
 newNbBlock(NbChatBubble):
   text: string
@@ -93,5 +53,5 @@ proc chatBubble*(nb: var Nb, text: string, name: string, image: string, left: bo
 template chat*(character: ChatBubbleCharacter, message: string) =
   nb.chatBubble(text=message, name=character.name, image=character.image, left=character.left, borderColor=character.borderColor, backgroundColor=character.backgroundColor)
 
-func createChatBubbleCharacter*(left: bool, borderColor: Color = colLightBlue, backgroundColor = borderColor.washColor, name = "", image = ""): ChatBubbleCharacter =
+func newChatBubbleCharacter*(left: bool, borderColor: Color = colLightBlue, backgroundColor = borderColor.washColor, name = "", image = ""): ChatBubbleCharacter =
   ChatBubbleCharacter(left: left, borderColor: borderColor, backgroundColor: backgroundColor, name: name, image: image)
