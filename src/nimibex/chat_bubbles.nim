@@ -3,7 +3,7 @@ import nimib
 
 export colors
 
-func washColor*(c: Color, factor: float = 0.8): Color =
+func washColor*(c: Color, factor: float = 0.7): Color =
   ## Increase brightness and move towards white (less saturation)
   c.mix(colWhite, (x: int, y: int) => int((1-factor) * x.float + factor * y.float))
 
