@@ -1,11 +1,11 @@
-import std / [colors, strformat]
+import std / [colors, strformat, sugar]
 import nimib
 
 export colors
 
-func washColor*(c: Color): Color =
+func washColor*(c: Color, factor: float = 0.8): Color =
   ## Increase brightness and move towards white (less saturation)
-  discard
+  c.mix(colWhite, (x: int, y: int) => int((1-factor) * x.float + factor * y.float))
 
 discard hlHtml"""
 <style>
@@ -67,7 +67,7 @@ newNbBlock(NbChatBubble):
     let flexDirection = if blk.left: "row" else: "row-reverse"
     let align = if blk.left: "left" else: "right"
     let wrapperStyles = &"display: flex; align-content: flex-start; align-items: center; gap: .5rem; flex-direction: {flexDirection}; margin-bottom: 0.5rem;"
-    let contentStyles = &"border-color: {blk.borderColor};  background-color: {blk.backgroundColor};  border-width: 1px;  margin-top: 0;  margin-bottom: 0;  max-width: 32rem;  border-radius: .75rem;  padding-top: 0; padding-bottom: 0; padding-left: .75rem; padding-right: .75rem;"
+    let contentStyles = &"border: 1px solid {blk.borderColor}; background-color: {blk.backgroundColor}; margin-top: 0;  margin-bottom: 0;  max-width: 32rem;  border-radius: .75rem;  padding-top: 0; padding-bottom: 0; padding-left: .75rem; padding-right: .75rem;"
     let imageStyles = "height: 32px; width: auto; image-fit: contain;"
     let columnStyles = "display:flex; flex-direction: column;"
     withNewlines:
@@ -93,5 +93,5 @@ proc chatBubble*(nb: var Nb, text: string, name: string, image: string, left: bo
 template chat*(character: ChatBubbleCharacter, message: string) =
   nb.chatBubble(text=message, name=character.name, image=character.image, left=character.left, borderColor=character.borderColor, backgroundColor=character.backgroundColor)
 
-func createChatBubbleCharacter*(left: bool, borderColor: Color = colLightBlue, backgroundColor = borderColor.intensity(1.2), name = "", image = ""): ChatBubbleCharacter =
+func createChatBubbleCharacter*(left: bool, borderColor: Color = colLightBlue, backgroundColor = borderColor.washColor, name = "", image = ""): ChatBubbleCharacter =
   ChatBubbleCharacter(left: left, borderColor: borderColor, backgroundColor: backgroundColor, name: name, image: image)
