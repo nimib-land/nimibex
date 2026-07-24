@@ -12,6 +12,8 @@ permissions:
   pages: write
   statuses: write
 
+concurrency: preview-deploy-${{ github.ref }}
+
 jobs:
   deploy-preview:
     runs-on: ubuntu-latest

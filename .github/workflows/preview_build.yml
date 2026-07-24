@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       - main
+
+concurrency: preview-build-${{ github.ref }}
+
 jobs:
   tests:
     runs-on: ubuntu-latest
