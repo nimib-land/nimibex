@@ -13,7 +13,12 @@ let characterRight2 = newChatBubbleCharacter(left=false, name="Teacher's assista
 characterLeft.chat("Hi there!")
 characterLeft.chat("This is a **chat bubble**!")
 characterRight.chat("Hi, I'm also here!")
-characterRight.chat("And I can show code snippets: `z = x + y`")
+characterRight.chat: hlMd"""
+And I can show code snippets:
+```py
+z = x + y * 2
+```
+"""
 
 nbText: "Each chat bubble is its own block, so you can place them wherever you like!"
 
