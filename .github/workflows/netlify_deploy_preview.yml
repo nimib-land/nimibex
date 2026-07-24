@@ -11,6 +11,7 @@ on:
 
 permissions:
   statuses: write
+  pull-requests: read
 
 jobs:
   deploy:
@@ -28,13 +29,14 @@ jobs:
         run: echo "GITHUB_SHA_SHORT=$(echo ${{ steps.source-run-info.outputs.sourceHeadSha }} | cut -c 1-20)" >> $GITHUB_ENV
       - run: echo Short hash = ${{ env.GITHUB_SHA_SHORT }}
       - name: Show pending status check
-        uses: Sibz/github-status-action@v1.1.5
+        uses: myrotvorets/set-commit-status-action@v2.0.1
         with:
-          authToken: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           context: Netlify preview
           sha: ${{ steps.source-run-info.outputs.sourceHeadSha }}
           description: Deploying site to Netlify. Please wait...
           state: pending
+          allowForks: true
       - run: rm -rf docs
       - name: 'Download artifacts'
         uses: dawidd6/action-download-artifact@v2
@@ -53,12 +55,13 @@ jobs:
           install_command: ls
           build_command: ls
       - name: Status check
-        uses: Sibz/github-status-action@v1.1.5
+        uses: myrotvorets/set-commit-status-action@v2.0.1
         with:
-          authToken: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           context: Netlify preview
           description: Click link to preview ⇒
           sha: ${{ steps.source-run-info.outputs.sourceHeadSha }}
           state: success
+          allowForks: true
           # customize with netlify site name
           target_url: https://${{ env.GITHUB_SHA_SHORT }}--nimibex.netlify.app
