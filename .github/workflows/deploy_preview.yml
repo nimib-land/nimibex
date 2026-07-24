@@ -56,8 +56,8 @@ jobs:
           message: |
             :rocket: View preview at: <br/> ${{ env.preview_url }}
             :---:
-            - Last deployed commit**: ${{ github.event.workflow_run.head_commit.message }} (${{ github.event.workflow_run.head_sha }})
-            - Last deploy time: ${{ github.event.workflow_run.updated_at }}
+            - **Last deployed commit**: ${{ github.event.workflow_run.head_commit.message }} (${{ github.event.workflow_run.head_sha }})
+            - **Last deploy time**: ${{ github.event.workflow_run.updated_at }}
       # Update the status to say that the deploy is done
       - name: Status check
         uses: myrotvorets/set-commit-status-action@v2.0.1
