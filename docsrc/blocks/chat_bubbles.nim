@@ -11,7 +11,12 @@ let characterRight = newChatBubbleCharacter(left=false, name="Teacher", borderCo
 let characterRight2 = newChatBubbleCharacter(left=false, name="Teacher's assistant", borderColor=colPink)
 
 characterLeft.chat("Hi there!")
-characterLeft.chat("This is a chat bubble!")
+characterLeft.chat("This is a **chat bubble**!")
+characterRight.chat("Hi, I'm also here!")
+characterRight.chat("And I can show code snippets: `z = x + y`")
+characterLeft.chat("Cool! B-)")
+
+nbText: "### Usage"
 
 
 nbSave()
