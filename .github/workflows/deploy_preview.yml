@@ -33,3 +33,11 @@ jobs:
           action: deploy
           pr-number: ${{ github.event.workflow_run.pull_requests[0].number }}
           token: ${{ github.token }}
+
+      - name: Post preview URL comment
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          number: ${{ github.event.workflow_run.pull_requests[0].number }}
+          header: pr-preview
+          message: |
+            [Preview deployed](${{ steps.preview.outputs.preview-url }}) 🎉
