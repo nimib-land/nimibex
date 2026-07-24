@@ -2,9 +2,9 @@ import nimib, nimibook, nimibex / [chat_bubbles]
 
 nbInit(theme = useNimibook)
 
-nbText: "## Chat Bubbles"
+nbText: "# Chat Bubbles"
 
-nbText: "### Example"
+nbText: "## Example"
 
 let characterLeft = newChatBubbleCharacter(left=true, name="Demo user #1")
 let characterRight = newChatBubbleCharacter(left=false, name="Demo user #2", color=colSpringGreen)
@@ -24,7 +24,7 @@ nbText: "Each chat bubble is its own block, so you can place them wherever you l
 characterLeft.chat("Cool! B-)")
 
 nbText: hlMd"""
-### Usage
+## Usage
 To create a chat bubble you first have to create a `ChatBubbleCharacter` which will contain the information on how to render chat bubble (color, left/right, username, icon)
 """
 
