@@ -21,4 +21,6 @@ def add(a, b):
 How was _that_?
 """
 
+characterRight.chat("That is correct!")
+
 nbSave()
