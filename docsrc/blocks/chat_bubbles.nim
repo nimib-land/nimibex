@@ -4,7 +4,7 @@ nbInit(theme = useNimibook)
 
 nbText: "## Chat Bubbles"
 
-nbText: "### Demo"
+nbText: "### Example"
 
 let characterLeft = newChatBubbleCharacter(left=true, name="Demo user #1")
 let characterRight = newChatBubbleCharacter(left=false, name="Demo user #2", color=colSpringGreen)
