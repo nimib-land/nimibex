@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   gen:
     name: Generate and deploy docs
@@ -14,7 +19,7 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: apt install
         run: sudo apt install -y libpcre3 libblas-dev liblapack-dev
       - uses: iffy/install-nim@v5
@@ -25,9 +30,10 @@ jobs:
           nimble setup
           nimble docs
           nimble buildBook
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload Pages artifact       # ← packages ./docs as an artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
-          keep_files: true
+          path: ./docs
+      - name: Deploy to GitHub Pages      # ← creates an actual deployment
+        id: deployment
+        uses: actions/deploy-pages@v4
