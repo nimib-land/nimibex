@@ -1,0 +1,80 @@
+{
+  "version": 2,
+  "packages": {
+    "nim": {
+      "version": "2.2.10",
+      "vcsRevision": "9fe2137fa2f3f66cf5a44f357d461829ac9e20c4",
+      "url": "https://github.com/nim-lang/Nim.git",
+      "downloadMethod": "git",
+      "dependencies": [],
+      "checksums": {
+        "sha1": "17ec440fdb89f8903db29a17898af590087d2b64"
+      }
+    },
+    "parsetoml": {
+      "version": "0.7.2",
+      "vcsRevision": "d297f5a81be2472905d367aa675dcbbca6e7a5d2",
+      "url": "https://github.com/NimParsers/parsetoml.git",
+      "downloadMethod": "git",
+      "dependencies": [
+        "nim"
+      ],
+      "checksums": {
+        "sha1": "2a9fb57ef1f6460fd61b1cfab2d83af44f788a25"
+      }
+    },
+    "fusion": {
+      "version": "1.2",
+      "vcsRevision": "0b0a0273b8df860cd54e3fcca7bb4c617244ac77",
+      "url": "https://github.com/nim-lang/fusion",
+      "downloadMethod": "git",
+      "dependencies": [
+        "nim"
+      ],
+      "checksums": {
+        "sha1": "408bde8679bce63dfb6f424e107eb37c5eb31510"
+      }
+    },
+    "jsony": {
+      "version": "1.1.6",
+      "vcsRevision": "bb647e1ca21af25ffdc423bcb96feeeeae963ca2",
+      "url": "https://github.com/treeform/jsony",
+      "downloadMethod": "git",
+      "dependencies": [
+        "nim"
+      ],
+      "checksums": {
+        "sha1": "b28964a93a3cf7248126ba39047593cd63a3aa6d"
+      }
+    },
+    "markdown": {
+      "version": "0.8.8",
+      "vcsRevision": "5a7a7bafd1da23b25332316a7b888e6586f4177a",
+      "url": "https://github.com/soasme/nim-markdown",
+      "downloadMethod": "git",
+      "dependencies": [
+        "nim"
+      ],
+      "checksums": {
+        "sha1": "a59d1205efe2e0bbc3657481e188ce7e7de3d943"
+      }
+    },
+    "nimib": {
+      "version": "0.4.1",
+      "vcsRevision": "99ac3477f6a9d421ea65aeda1c9682d343c5bc35",
+      "url": "https://github.com/pietroppeter/nimib",
+      "downloadMethod": "git",
+      "dependencies": [
+        "nim",
+        "fusion",
+        "markdown",
+        "parsetoml",
+        "jsony"
+      ],
+      "checksums": {
+        "sha1": "08d25173ed4987eb7e65472dad37f3a2671783c0"
+      }
+    }
+  },
+  "tasks": {}
+}

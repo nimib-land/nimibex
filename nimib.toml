@@ -1,0 +1,9 @@
+[nimib]
+srcDir = "docsrc"
+homeDir = "docs"
+
+[nimibook]
+language = "en-us"
+title = "Nimibex"
+description = "Nimibex Documentation"
+git_repository_url = "https://github.com/nimib-land/nimibex"
