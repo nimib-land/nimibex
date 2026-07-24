@@ -15,9 +15,28 @@ permissions:
   id-token: write
 
 jobs:
+  get-pr-number:
+    if: ${{ github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    outputs:
+      pr-number: ${{ steps.get-pr.outputs.pr-number }}
+    steps:
+      - name: Get PR number from workflow run
+        id: get-pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          PR_NUMBER=$(gh api repos/${{ github.repository }}/pulls \
+            --jq ".[] | select(.head.sha == \"${{ github.event.workflow_run.head_sha }}\") | .number" \
+            | head -1)
+          echo "pr-number=$PR_NUMBER" >> $GITHUB_OUTPUT
+
   deploy-preview:
-    if: ${{ github.event.workflow_run.event == 'pull_request' }}
+    needs: get-pr-number
+    if: ${{ needs.get-pr-number.outputs.pr-number != '' }}
     uses: PazerOP/pr-preview-action/.github/workflows/pr-preview-action-ghp.yml@4499064eaedb2694468204bbbc4fb04bdcd3284f
     with:
       artifact-name: build-${{ github.event.workflow_run.head_sha }}
+      action: deploy                                        # skip auto-detection
+      pr-number: ${{ needs.get-pr-number.outputs.pr-number }}  # pass PR number explicitly
     secrets: inherit
