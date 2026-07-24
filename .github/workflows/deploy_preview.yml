@@ -40,4 +40,4 @@ jobs:
           number: ${{ github.event.workflow_run.pull_requests[0].number }}
           header: pr-preview
           message: |
-            [Preview deployed](${{ steps.preview.outputs.preview-url }}) 🎉
+            [Preview deployed](${{ env.preview_url }}) 🎉
