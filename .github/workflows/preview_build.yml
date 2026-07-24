@@ -1,5 +1,5 @@
-# build docs and uploads saves output as artifact for netlify_deploy_preview pipeline to be used
-name: netlify_build_docs
+# build docs and uploads saves output as artifact for deploy_preview pipeline to be used
+name: preview_build
 on:
   pull_request:
     branches:
@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: apt install
         run: sudo apt install -y libpcre3 libblas-dev liblapack-dev
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: install nim
         id: install_nim
         uses: iffy/install-nim@v5

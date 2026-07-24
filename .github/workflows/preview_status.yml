@@ -1,5 +1,5 @@
 # creates a task saying that it is waiting for the build to finish, does nothing else
-name: netlify PR task
+name: PR Preview task status
 on:
   pull_request_target:  # runs for activity on pr but does not use code from pr and only from pr target
     branches:
@@ -13,13 +13,13 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - run: echo Commit hash = ${{ github.event.pull_request.head.sha }} 
       - name: Show pending status check
-        uses: myrotvorets/set-commit-status-action@v2.0.1
+        uses: myrotvorets/set-commit-status-action@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          context: Netlify preview
+          context: Preview
           sha: ${{ github.event.pull_request.head.sha }}
           description: Waiting for build to finish...
           status: pending
