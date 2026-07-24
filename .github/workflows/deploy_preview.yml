@@ -31,8 +31,27 @@ jobs:
             | head -1)
           echo "pr-number=$PR_NUMBER" >> $GITHUB_OUTPUT
 
-  deploy-preview:
+  reupload-artifact:
     needs: get-pr-number
+    if: ${{ needs.get-pr-number.outputs.pr-number != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact from triggering run    # 👈 key step: cross-run download
+        uses: actions/download-artifact@v4
+        with:
+          name: build-${{ github.event.workflow_run.head_sha }}
+          run-id: ${{ github.event.workflow_run.id }}  # 👈 explicitly target the build run
+          github-token: ${{ github.token }}
+          path: __artifact
+
+      - name: Re-upload artifact into THIS run         # 👈 so the reusable workflow can find it
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ github.event.workflow_run.head_sha }}
+          path: __artifact/
+
+  deploy-preview:
+    needs: [get-pr-number, reupload-artifact]
     if: ${{ needs.get-pr-number.outputs.pr-number != '' }}
     uses: PazerOP/pr-preview-action/.github/workflows/pr-preview-action-ghp.yml@4499064eaedb2694468204bbbc4fb04bdcd3284f
     with:
