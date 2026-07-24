@@ -5,11 +5,10 @@ on:
     branches:
       - main
 
-
 jobs:
   gen:
     name: Generate and deploy docs
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
 
     permissions:
       contents: read
@@ -28,10 +27,10 @@ jobs:
           nimble setup
           nimble docs
           nimble buildBook
-      - name: Upload Pages artifact       # ← packages ./docs as an artifact
-        uses: actions/upload-pages-artifact@v4
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: ./docs
-      - name: Deploy to GitHub Pages      # ← creates an actual deployment
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          keep_files: true
+          force_orphan: false # prevents force-push wiping previews
