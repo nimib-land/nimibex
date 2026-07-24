@@ -12,7 +12,7 @@ type
     name*: string
     image*: string
     left*: bool
-    borderColor*: Color
+    color*: Color
     backgroundColor*: Color
     textColor*: Color
 
@@ -21,7 +21,7 @@ newNbBlock(NbChatBubble):
   name: string
   image: string
   left: bool
-  borderColor: Color
+  color: Color
   backgroundColor: Color
   textColor: Color
   toHtml:
@@ -29,7 +29,7 @@ newNbBlock(NbChatBubble):
     let flexDirection = if blk.left: "row" else: "row-reverse"
     let align = if blk.left: "left" else: "right"
     let wrapperStyles = &"display: flex; align-content: flex-start; align-items: center; gap: .5rem; flex-direction: {flexDirection}; margin-bottom: 0.5rem;"
-    let contentStyles = &"border: 1px solid {blk.borderColor}; background-color: {blk.backgroundColor}; color: {blk.textColor}; margin-top: 0;  margin-bottom: 0;  max-width: 32rem;  border-radius: .75rem;  padding-top: 0; padding-bottom: 0; padding-left: .75rem; padding-right: .75rem;"
+    let contentStyles = &"border: 1px solid {blk.color}; background-color: {blk.backgroundColor}; color: {blk.textColor}; margin-top: 0;  margin-bottom: 0;  max-width: 32rem;  border-radius: .75rem;  padding-top: 0; padding-bottom: 0; padding-left: .75rem; padding-right: .75rem;"
     let imageStyles = "height: 32px; width: auto; image-fit: contain;"
     let columnStyles = "display:flex; flex-direction: column;"
     withNewlines:
@@ -48,12 +48,12 @@ newNbBlock(NbChatBubble):
       "</div>"
 
 # Two overrides: manual and from a character
-proc chatBubble*(nb: var Nb, text: string, name: string, image: string, left: bool, borderColor: Color, backgroundColor: Color, textColor: Color) =
-  let blk = newNbChatBubble(text=text, name=name, image=image, left=left, borderColor=borderColor, backgroundColor = backgroundColor, textColor = textColor)
+proc chatBubble*(nb: var Nb, text: string, name: string, image: string, left: bool, color: Color, backgroundColor: Color, textColor: Color) =
+  let blk = newNbChatBubble(text=text, name=name, image=image, left=left, color=color, backgroundColor = backgroundColor, textColor = textColor)
   nb.add blk
 
 template chat*(character: ChatBubbleCharacter, message: string) =
-  nb.chatBubble(text=message, name=character.name, image=character.image, left=character.left, borderColor=character.borderColor, backgroundColor=character.backgroundColor, textColor=character.textColor)
+  nb.chatBubble(text=message, name=character.name, image=character.image, left=character.left, color=character.color, backgroundColor=character.backgroundColor, textColor=character.textColor)
 
-func newChatBubbleCharacter*(left: bool, borderColor: Color = colLightBlue, backgroundColor = borderColor.washColor, textColor = colBlack, name = "", image = ""): ChatBubbleCharacter =
-  ChatBubbleCharacter(left: left, borderColor: borderColor, backgroundColor: backgroundColor, textColor: textColor, name: name, image: image)
+func newChatBubbleCharacter*(left: bool, color: Color = colLightBlue, backgroundColor = color.washColor, textColor = colBlack, name = "", image = ""): ChatBubbleCharacter =
+  ChatBubbleCharacter(left: left, color: color, backgroundColor: backgroundColor, textColor: textColor, name: name, image: image)

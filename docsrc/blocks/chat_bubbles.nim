@@ -6,9 +6,8 @@ nbText: "## Chat Bubbles"
 
 nbText: "### Demo"
 
-let characterLeft = newChatBubbleCharacter(left=true, name="Reader")
-let characterRight = newChatBubbleCharacter(left=false, name="Teacher", borderColor=colSpringGreen)#, image="https://www.svgrepo.com/show/340058/content-delivery-network.svg")
-let characterRight2 = newChatBubbleCharacter(left=false, name="Teacher's assistant", borderColor=colPink)
+let characterLeft = newChatBubbleCharacter(left=true, name="Demo user #1")
+let characterRight = newChatBubbleCharacter(left=false, name="Demo user #2", color=colSpringGreen)
 
 characterLeft.chat("Hi there!")
 characterLeft.chat("This is a **chat bubble**!")
@@ -24,7 +23,10 @@ nbText: "Each chat bubble is its own block, so you can place them wherever you l
 
 characterLeft.chat("Cool! B-)")
 
-nbText: "### Usage"
+nbText: hlMd"""
+### Usage
+To create a chat bubble you first have to create a `ChatBubbleCharacter` which will contain the information on how to render chat bubble (color, left/right, username, icon)
+"""
 
-
+# for raw calls, see the API documentation
 nbSave()

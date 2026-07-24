@@ -6,6 +6,9 @@ nbText: hlMd"""
 # Nimibex
 
 This repo collects extensions, experiments and extras for the Nimib ecosystem.
+
+### Links
+- [API documentation](./docs/index.html)
 """
 
 nbSave()
