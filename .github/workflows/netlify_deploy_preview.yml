@@ -64,4 +64,4 @@ jobs:
           state: success
           allowForks: true
           # customize with netlify site name
-          target_url: https://${{ env.GITHUB_SHA_SHORT }}--nimibex.netlify.app
+          targetUrl: https://${{ env.GITHUB_SHA_SHORT }}--nimibex.netlify.app
