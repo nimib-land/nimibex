@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: echo Commit hash = ${{ github.event.pull_request.head.sha }} 
       - name: Show pending status check
-        uses: myrotvorets/set-commit-status-action@v2
+        uses: myrotvorets/set-commit-status-action@v2.0.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           context: Preview

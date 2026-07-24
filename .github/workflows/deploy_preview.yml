@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
       # Update the status to say we have started the deploy
       - name: Show pending status check
-        uses: myrotvorets/set-commit-status-action@v2
+        uses: myrotvorets/set-commit-status-action@v2.0.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           context: Preview
@@ -57,7 +57,7 @@ jobs:
             - Last deploy time: ${{ github.event.workflow_run.updated_at }}
       # Update the status to say that the deploy is done
       - name: Status check
-        uses: myrotvorets/set-commit-status-action@v2
+        uses: myrotvorets/set-commit-status-action@v2.0.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           context: Preview
