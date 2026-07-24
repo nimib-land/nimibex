@@ -1,9 +1,9 @@
-# .github/workflows/deploy_preview.yml
+# Deploy the preview in GitHub Pages
 name: Deploy PR previews
 
 on:
   workflow_run:
-    workflows: [netlify_build_docs]
+    workflows: [preview_build]
     types: [completed]
 
 permissions:
@@ -17,7 +17,17 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-
+      # Update the status to say we have started the deploy
+      - name: Show pending status check
+        uses: myrotvorets/set-commit-status-action@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          context: Preview
+          sha: ${{ steps.source-run-info.outputs.sourceHeadSha }}
+          description: Deploying site. Please wait...
+          status: pending
+          allowForks: true
+      # Download the built docs from preview_build.yml
       - name: Download artifact from triggering run
         uses: actions/download-artifact@v4
         with:
@@ -25,7 +35,7 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ github.token }}
           path: ./docs
-
+      # Deploy docs to GitHub Pages
       - name: Deploy PR preview
         uses: rossjrw/pr-preview-action@v1
         with:
@@ -34,11 +44,25 @@ jobs:
           pr-number: ${{ github.event.workflow_run.pull_requests[0].number }}
           token: ${{ github.token }}
           wait-for-pages-deployment: true
-
+      # Write a sticky comment in the PR with a link to the preview
       - name: Post preview URL comment
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           number: ${{ github.event.workflow_run.pull_requests[0].number }}
           header: pr-preview
           message: |
-            [Preview deployed](${{ env.preview_url }}) 🎉
+            :rocket: View preview at: <br/> ${{ env.preview_url }}
+            :---:
+            - Last deployed commit**: ${{ github.event.workflow_run.head_commit.message }} (${{ github.event.workflow_run.head_sha }})
+            - Last deploy time: ${{ github.event.workflow_run.updated_at }}
+      # Update the status to say that the deploy is done
+      - name: Status check
+        uses: myrotvorets/set-commit-status-action@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          context: Preview
+          description: Click link to preview ⇒
+          sha: ${{ steps.source-run-info.outputs.sourceHeadSha }}
+          status: success
+          allowForks: true
+          targetUrl: ${{ env.preview_url }}
