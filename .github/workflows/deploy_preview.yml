@@ -38,7 +38,6 @@ jobs:
 
   deploy-preview:
     needs: [reupload-artifact]
-    if: ${{ needs.get-pr-number.outputs.pr-number != '' }}
     uses: PazerOP/pr-preview-action/.github/workflows/pr-preview-action-ghp.yml@4499064eaedb2694468204bbbc4fb04bdcd3284f
     with:
       artifact-name: build-${{ github.event.workflow_run.head_sha }}
