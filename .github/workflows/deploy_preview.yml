@@ -35,7 +35,7 @@ jobs:
 
   deploy-preview:
     needs: build
-    uses: PazerOP/pr-preview-action/.github/workflows/pr-preview-action-ghp.yml@v1
+    uses: PazerOP/pr-preview-action/.github/workflows/pr-preview-action-ghp.yml@4499064eaedb2694468204bbbc4fb04bdcd3284f
     with:
       artifact-name: build-${{ github.event.pull_request.head.sha }}
     secrets: inherit
