@@ -22,5 +22,5 @@ jobs:
           context: Netlify preview
           sha: ${{ github.event.pull_request.head.sha }}
           description: Waiting for build to finish...
-          state: pending
+          status: pending
           allowForks: true

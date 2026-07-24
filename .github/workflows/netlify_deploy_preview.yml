@@ -35,7 +35,7 @@ jobs:
           context: Netlify preview
           sha: ${{ steps.source-run-info.outputs.sourceHeadSha }}
           description: Deploying site to Netlify. Please wait...
-          state: pending
+          status: pending
           allowForks: true
       - run: rm -rf docs
       - name: 'Download artifacts'
@@ -61,7 +61,7 @@ jobs:
           context: Netlify preview
           description: Click link to preview ⇒
           sha: ${{ steps.source-run-info.outputs.sourceHeadSha }}
-          state: success
+          status: success
           allowForks: true
           # customize with netlify site name
           targetUrl: https://${{ env.GITHUB_SHA_SHORT }}--nimibex.netlify.app
