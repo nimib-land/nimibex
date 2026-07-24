@@ -23,7 +23,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           context: Preview
-          sha: ${{ steps.source-run-info.outputs.sourceHeadSha }}
+          sha: ${{ github.event.workflow_run.head_sha }}
           description: Deploying site. Please wait...
           status: pending
           allowForks: true
@@ -62,7 +62,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           context: Preview
           description: Click link to preview ⇒
-          sha: ${{ steps.source-run-info.outputs.sourceHeadSha }}
+          sha: ${{ github.event.workflow_run.head_sha }}
           status: success
           allowForks: true
           targetUrl: ${{ env.preview_url }}
