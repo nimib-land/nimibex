@@ -14,6 +14,9 @@ characterLeft.chat("Hi there!")
 characterLeft.chat("This is a **chat bubble**!")
 characterRight.chat("Hi, I'm also here!")
 characterRight.chat("And I can show code snippets: `z = x + y`")
+
+nbText: "Each chat bubble is its own block, so you can place them wherever you like!"
+
 characterLeft.chat("Cool! B-)")
 
 nbText: "### Usage"
