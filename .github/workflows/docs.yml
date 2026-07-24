@@ -10,6 +10,9 @@ jobs:
     name: Generate and deploy docs
     runs-on: ubuntu-latest  
 
+    permissions:
+      contents: write
+
     steps:
       - uses: actions/checkout@v2
       - name: apt install
@@ -23,7 +26,7 @@ jobs:
           nimble docs
           nimble buildBook
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
