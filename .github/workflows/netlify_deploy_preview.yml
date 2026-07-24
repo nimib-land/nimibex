@@ -8,6 +8,10 @@ on:
       - netlify_build_docs
     types:
       - completed
+
+permissions:
+  statuses: write
+
 jobs:
   deploy:
     name: Deploy Preview

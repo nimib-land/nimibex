@@ -4,6 +4,10 @@ on:
   pull_request_target:  # runs for activity on pr but does not use code from pr and only from pr target
     branches:
       - main
+
+permissions:
+  statuses: write
+
 jobs:
   tests:
     runs-on: ubuntu-latest
