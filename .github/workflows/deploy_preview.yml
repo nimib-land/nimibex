@@ -20,5 +20,4 @@ jobs:
     uses: PazerOP/pr-preview-action/.github/workflows/pr-preview-action-ghp.yml@4499064eaedb2694468204bbbc4fb04bdcd3284f
     with:
       artifact-name: build-${{ github.event.workflow_run.head_sha }}
-      workflow-run-id: ${{ github.event.workflow_run.id }}
     secrets: inherit
