@@ -1,0 +1,10 @@
+nimTitle	chat_bubbles	chat_bubbles.html	module nimibex/chat_bubbles		0
+nim	washColor	chat_bubbles.html#washColor,Color,float	proc washColor(c: Color; factor: float = 0.7): Color		6
+nim	ChatBubbleCharacter	chat_bubbles.html#ChatBubbleCharacter	object ChatBubbleCharacter		11
+nim	NbChatBubble	chat_bubbles.html#NbChatBubble	type NbChatBubble		48
+nim	newNbChatBubble	chat_bubbles.html#newNbChatBubble,string,string,string,bool,Color,Color,Color	proc newNbChatBubble(text: string = default(typedesc[string]);\n                name: string = default(typedesc[string]);\n                image: string = default(typedesc[string]);\n                left: bool = default(typedesc[bool]);\n                borderColor: Color = default(typedesc[Color]);\n                backgroundColor: Color = default(typedesc[Color]);\n                textColor: Color = default(typedesc[Color])): NbChatBubble		89
+nim	nbchatbubbleToHtml	chat_bubbles.html#nbchatbubbleToHtml,NbBlock,Nb	proc nbchatbubbleToHtml(blk: NbBlock; nb: Nb): string		89
+nim	dump	chat_bubbles.html#dump.e,NbChatBubble	method dump(n`gensym79: NbChatBubble): string		89
+nim	chatBubble	chat_bubbles.html#chatBubble,Nb,string,string,string,bool,Color,Color,Color	proc chatBubble(nb: var Nb; text: string; name: string; image: string; left: bool;\n           borderColor: Color; backgroundColor: Color; textColor: Color)		51
+nim	chat	chat_bubbles.html#chat.t,ChatBubbleCharacter,string	template chat(character: ChatBubbleCharacter; message: string)		55
+nim	newChatBubbleCharacter	chat_bubbles.html#newChatBubbleCharacter,bool,Color,string,string	proc newChatBubbleCharacter(left: bool; borderColor: Color = colLightBlue;\n                       backgroundColor = borderColor.washColor;\n                       textColor = colBlack; name = ""; image = ""): ChatBubbleCharacter		58
