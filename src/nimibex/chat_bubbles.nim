@@ -55,5 +55,5 @@ proc chatBubble*(nb: var Nb, text: string, name: string, image: string, left: bo
 template chat*(character: ChatBubbleCharacter, message: string) =
   nb.chatBubble(text=message, name=character.name, image=character.image, left=character.left, color=character.color, backgroundColor=character.backgroundColor, textColor=character.textColor)
 
-func newChatBubbleCharacter*(left: bool, color: Color = colLightBlue, backgroundColor = color.washColor, textColor = colBlack, name = "", image = ""): ChatBubbleCharacter =
+func newChatBubbleCharacter*(left = true, color: Color = colLightBlue, backgroundColor = color.washColor, textColor = colBlack, name = "", image = ""): ChatBubbleCharacter =
   ChatBubbleCharacter(left: left, color: color, backgroundColor: backgroundColor, textColor: textColor, name: name, image: image)
