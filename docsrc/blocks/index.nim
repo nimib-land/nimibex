@@ -3,7 +3,7 @@ import nimib, nimibook
 nbInit(theme = useNimibook)
 
 nbText: hlMd"""
-## Blocks
+# Blocks
 This section lists and documents all blocks that are available in Nimibex. 
 To import a block you have to explicitly import its submodule.
 We have deliberately chosen to not provide a way to import all modules because
