@@ -64,7 +64,7 @@
   left*: bool
   color*: Color
   backgroundColor*: Color
-  textColor*: Color">ChatBubbleCharacter</a></li>
+  textColor*: Option[Color]">ChatBubbleCharacter</a></li>
 <li><a class="reference" href="#NbChatBubble" title="NbChatBubble = ref object of NbBlock
   text*: string
   name*: string
@@ -72,7 +72,7 @@
   left*: bool
   color*: Color
   backgroundColor*: Color
-  textColor*: Color">NbChatBubble</a></li>
+  textColor*: Option[Color]">NbChatBubble</a></li>
 
     </ul>
   </details>
@@ -82,9 +82,9 @@
     <summary><a class="reference reference-toplevel" href="#12" id="62">Procs</a></summary>
     <ul class="simple simple-toc-section">
       <ul class="simple nested-toc-section">chatBubble
-  <li><a class="reference" href="#chatBubble%2CNb%2Cstring%2Cstring%2Cstring%2Cbool%2CColor%2CColor%2CColor" title="chatBubble(nb: var Nb; text: string; name: string; image: string; left: bool;
-           color: Color; backgroundColor: Color; textColor: Color)">chatBubble(nb: var Nb; text: string; name: string; image: string; left: bool;
-           color: Color; backgroundColor: Color; textColor: Color)</a></li>
+  <li><a class="reference" href="#chatBubble%2CNb%2Cstring%2Cstring%2Cstring%2Cbool%2CColor%2CColor%2COption%5BColor%5D" title="chatBubble(nb: var Nb; text: string; name: string; image: string; left: bool;
+           color: Color; backgroundColor: Color; textColor: Option[Color])">chatBubble(nb: var Nb; text: string; name: string; image: string; left: bool;
+           color: Color; backgroundColor: Color; textColor: Option[Color])</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">nbchatbubbleToHtml
@@ -92,31 +92,35 @@
 
 </ul>
 <ul class="simple nested-toc-section">newChatBubbleCharacter
-  <li><a class="reference" href="#newChatBubbleCharacter%2CColor%2Cstring%2Cstring" title="newChatBubbleCharacter(left = true; color: Color = colLightBlue;
-                       backgroundColor = color.washColor; textColor = colBlack;
-                       name = &quot;&quot;; image = &quot;&quot;): ChatBubbleCharacter">newChatBubbleCharacter(left = true; color: Color = colLightBlue;
-                       backgroundColor = color.washColor; textColor = colBlack;
+  <li><a class="reference" href="#newChatBubbleCharacter%2CColor%2Cstring%2Cstring" title="newChatBubbleCharacter(left = true;
+                       color: Color = parseHtmlColor(&quot;lightskyblue&quot;);
+                       backgroundColor = color.washColor;
+                       textColor: Option[Color] | Color = none(Color);
+                       name = &quot;&quot;; image = &quot;&quot;): ChatBubbleCharacter">newChatBubbleCharacter(left = true;
+                       color: Color = parseHtmlColor(&quot;lightskyblue&quot;);
+                       backgroundColor = color.washColor;
+                       textColor: Option[Color] | Color = none(Color);
                        name = &quot;&quot;; image = &quot;&quot;): ChatBubbleCharacter</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">newNbChatBubble
-  <li><a class="reference" href="#newNbChatBubble%2Cstring%2Cstring%2Cstring%2Cbool%2CColor%2CColor%2CColor" title="newNbChatBubble(text: string = default(typedesc[string]);
+  <li><a class="reference" href="#newNbChatBubble%2Cstring%2Cstring%2Cstring%2Cbool%2CColor%2CColor%2COption%5BColor%5D" title="newNbChatBubble(text: string = default(typedesc[string]);
                 name: string = default(typedesc[string]);
                 image: string = default(typedesc[string]);
                 left: bool = default(typedesc[bool]);
                 color: Color = default(typedesc[Color]);
                 backgroundColor: Color = default(typedesc[Color]);
-                textColor: Color = default(typedesc[Color])): NbChatBubble">newNbChatBubble(text: string = default(typedesc[string]);
+                textColor: Option[Color] = default(typedesc[Option[Color]])): NbChatBubble">newNbChatBubble(text: string = default(typedesc[string]);
                 name: string = default(typedesc[string]);
                 image: string = default(typedesc[string]);
                 left: bool = default(typedesc[bool]);
                 color: Color = default(typedesc[Color]);
                 backgroundColor: Color = default(typedesc[Color]);
-                textColor: Color = default(typedesc[Color])): NbChatBubble</a></li>
+                textColor: Option[Color] = default(typedesc[Option[Color]])): NbChatBubble</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">washColor
-  <li><a class="reference" href="#washColor%2CColor%2Cfloat" title="washColor(c: Color; factor: float = 0.7): Color">washColor(c: Color; factor: float = 0.7): Color</a></li>
+  <li><a class="reference" href="#washColor%2CColor%2Cfloat" title="washColor(c: Color; factor: float = 0.2): Color">washColor(c: Color; factor: float = 0.2): Color</a></li>
 
 </ul>
 
@@ -128,7 +132,7 @@
     <summary><a class="reference reference-toplevel" href="#14" id="64">Methods</a></summary>
     <ul class="simple simple-toc-section">
       <ul class="simple nested-toc-section">dump
-  <li><a class="reference" href="#dump.e%2CNbChatBubble" title="dump(n`gensym79: NbChatBubble): string">dump(n`gensym79: NbChatBubble): string</a></li>
+  <li><a class="reference" href="#dump.e%2CNbChatBubble" title="dump(n`gensym71: NbChatBubble): string">dump(n`gensym71: NbChatBubble): string</a></li>
 
 </ul>
 
@@ -168,12 +172,12 @@
   <span class="Identifier">left</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span>
   <span class="Identifier">color</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Color</span>
   <span class="Identifier">backgroundColor</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Color</span>
-  <span class="Identifier">textColor</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Color</span></pre></dt>
+  <span class="Identifier">textColor</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Option</span><span class="Other">[</span><span class="Identifier">Color</span><span class="Other">]</span></pre></dt>
   <dd>
     
     
-    <a href="https://github.com/nimib-land/nimibex/tree/main/src/nimibex/chat_bubbles.nim#L11" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/nimib-land/nimibex/edit/devel/src/nimibex/chat_bubbles.nim#L11" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/nimib-land/nimibex/tree/main/src/nimibex/chat_bubbles.nim#L13" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/nimib-land/nimibex/edit/devel/src/nimibex/chat_bubbles.nim#L13" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -185,12 +189,12 @@
   <span class="Identifier">left</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span>
   <span class="Identifier">color</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Color</span>
   <span class="Identifier">backgroundColor</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Color</span>
-  <span class="Identifier">textColor</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Color</span></pre></dt>
+  <span class="Identifier">textColor</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Option</span><span class="Other">[</span><span class="Identifier">Color</span><span class="Other">]</span></pre></dt>
   <dd>
     
     
-    <a href="https://github.com/nimib-land/nimibex/tree/main/src/nimibex/chat_bubbles.nim#L48" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/nimib-land/nimibex/edit/devel/src/nimibex/chat_bubbles.nim#L48" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/nimib-land/nimibex/tree/main/src/nimibex/chat_bubbles.nim#L52" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/nimib-land/nimibex/edit/devel/src/nimibex/chat_bubbles.nim#L52" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -201,15 +205,15 @@
   <h1><a class="toc-backref" href="#12">Procs</a></h1>
   <dl class="item">
     <div id="chatBubble-procs-all">
-  <div id="chatBubble,Nb,string,string,string,bool,Color,Color,Color">
-  <dt><pre><span class="Keyword">proc</span> <a href="#chatBubble%2CNb%2Cstring%2Cstring%2Cstring%2Cbool%2CColor%2CColor%2CColor"><span class="Identifier">chatBubble</span></a><span class="Other">(</span><span class="Identifier">nb</span><span class="Other">:</span> <span class="Keyword">var</span> <span class="Identifier">Nb</span><span class="Other">;</span> <span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span>
+  <div id="chatBubble,Nb,string,string,string,bool,Color,Color,Option[Color]">
+  <dt><pre><span class="Keyword">proc</span> <a href="#chatBubble%2CNb%2Cstring%2Cstring%2Cstring%2Cbool%2CColor%2CColor%2COption%5BColor%5D"><span class="Identifier">chatBubble</span></a><span class="Other">(</span><span class="Identifier">nb</span><span class="Other">:</span> <span class="Keyword">var</span> <span class="Identifier">Nb</span><span class="Other">;</span> <span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span>
                 <span class="Identifier">left</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">;</span> <span class="Identifier">backgroundColor</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">;</span>
-                <span class="Identifier">textColor</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+                <span class="Identifier">textColor</span><span class="Other">:</span> <span class="Identifier">Option</span><span class="Other">[</span><span class="Identifier">Color</span><span class="Other">]</span><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
     
-    <a href="https://github.com/nimib-land/nimibex/tree/main/src/nimibex/chat_bubbles.nim#L51" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/nimib-land/nimibex/edit/devel/src/nimibex/chat_bubbles.nim#L51" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/nimib-land/nimibex/tree/main/src/nimibex/chat_bubbles.nim#L55" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/nimib-land/nimibex/edit/devel/src/nimibex/chat_bubbles.nim#L55" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -232,29 +236,30 @@
 </div>
 <div id="newChatBubbleCharacter-procs-all">
   <div id="newChatBubbleCharacter,Color,string,string">
-  <dt><pre><span class="Keyword">func</span> <a href="#newChatBubbleCharacter%2CColor%2Cstring%2Cstring"><span class="Identifier">newChatBubbleCharacter</span></a><span class="Other">(</span><span class="Identifier">left</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span> <span class="Other">=</span> <span class="Identifier">colLightBlue</span><span class="Other">;</span>
+  <dt><pre><span class="Keyword">func</span> <a href="#newChatBubbleCharacter%2CColor%2Cstring%2Cstring"><span class="Identifier">newChatBubbleCharacter</span></a><span class="Other">(</span><span class="Identifier">left</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span>
+                            <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span> <span class="Other">=</span> <span class="Identifier">parseHtmlColor</span><span class="Other">(</span><span class="StringLit">&quot;lightskyblue&quot;</span><span class="Other">)</span><span class="Other">;</span>
                             <span class="Identifier">backgroundColor</span> <span class="Other">=</span> <span class="Identifier">color</span><span class="Other">.</span><span class="Identifier">washColor</span><span class="Other">;</span>
-                            <span class="Identifier">textColor</span> <span class="Other">=</span> <span class="Identifier">colBlack</span><span class="Other">;</span> <span class="Identifier">name</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">image</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">)</span><span class="Other">:</span> <a href="#ChatBubbleCharacter"><span class="Identifier">ChatBubbleCharacter</span></a> {.
-    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+                            <span class="Identifier">textColor</span><span class="Other">:</span> <span class="Identifier">Option</span><span class="Other">[</span><span class="Identifier">Color</span><span class="Other">]</span> <span class="Operator">|</span> <span class="Identifier">Color</span> <span class="Other">=</span> <span class="Identifier">none</span><span class="Other">(</span><span class="Identifier">Color</span><span class="Other">)</span><span class="Other">;</span>
+                            <span class="Identifier">name</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">image</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">)</span><span class="Other">:</span> <a href="#ChatBubbleCharacter"><span class="Identifier">ChatBubbleCharacter</span></a></pre></dt>
   <dd>
     
     
-    <a href="https://github.com/nimib-land/nimibex/tree/main/src/nimibex/chat_bubbles.nim#L58" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/nimib-land/nimibex/edit/devel/src/nimibex/chat_bubbles.nim#L58" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/nimib-land/nimibex/tree/main/src/nimibex/chat_bubbles.nim#L62" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/nimib-land/nimibex/edit/devel/src/nimibex/chat_bubbles.nim#L62" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
 
 </div>
 <div id="newNbChatBubble-procs-all">
-  <div id="newNbChatBubble,string,string,string,bool,Color,Color,Color">
-  <dt><pre><span class="Keyword">proc</span> <a href="#newNbChatBubble%2Cstring%2Cstring%2Cstring%2Cbool%2CColor%2CColor%2CColor"><span class="Identifier">newNbChatBubble</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="Identifier">default</span><span class="Other">(</span><span class="Identifier">typedesc</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">)</span><span class="Other">;</span>
+  <div id="newNbChatBubble,string,string,string,bool,Color,Color,Option[Color]">
+  <dt><pre><span class="Keyword">proc</span> <a href="#newNbChatBubble%2Cstring%2Cstring%2Cstring%2Cbool%2CColor%2CColor%2COption%5BColor%5D"><span class="Identifier">newNbChatBubble</span></a><span class="Other">(</span><span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="Identifier">default</span><span class="Other">(</span><span class="Identifier">typedesc</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">)</span><span class="Other">;</span>
                      <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="Identifier">default</span><span class="Other">(</span><span class="Identifier">typedesc</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">)</span><span class="Other">;</span>
                      <span class="Identifier">image</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="Identifier">default</span><span class="Other">(</span><span class="Identifier">typedesc</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">)</span><span class="Other">;</span>
                      <span class="Identifier">left</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">default</span><span class="Other">(</span><span class="Identifier">typedesc</span><span class="Other">[</span><span class="Identifier">bool</span><span class="Other">]</span><span class="Other">)</span><span class="Other">;</span>
                      <span class="Identifier">color</span><span class="Other">:</span> <span class="Identifier">Color</span> <span class="Other">=</span> <span class="Identifier">default</span><span class="Other">(</span><span class="Identifier">typedesc</span><span class="Other">[</span><span class="Identifier">Color</span><span class="Other">]</span><span class="Other">)</span><span class="Other">;</span>
                      <span class="Identifier">backgroundColor</span><span class="Other">:</span> <span class="Identifier">Color</span> <span class="Other">=</span> <span class="Identifier">default</span><span class="Other">(</span><span class="Identifier">typedesc</span><span class="Other">[</span><span class="Identifier">Color</span><span class="Other">]</span><span class="Other">)</span><span class="Other">;</span>
-                     <span class="Identifier">textColor</span><span class="Other">:</span> <span class="Identifier">Color</span> <span class="Other">=</span> <span class="Identifier">default</span><span class="Other">(</span><span class="Identifier">typedesc</span><span class="Other">[</span><span class="Identifier">Color</span><span class="Other">]</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <a href="#NbChatBubble"><span class="Identifier">NbChatBubble</span></a> {.
+    <span class="Identifier">textColor</span><span class="Other">:</span> <span class="Identifier">Option</span><span class="Other">[</span><span class="Identifier">Color</span><span class="Other">]</span> <span class="Other">=</span> <span class="Identifier">default</span><span class="Other">(</span><span class="Identifier">typedesc</span><span class="Other">[</span><span class="Identifier">Option</span><span class="Other">[</span><span class="Identifier">Color</span><span class="Other">]</span><span class="Other">]</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <a href="#NbChatBubble"><span class="Identifier">NbChatBubble</span></a> {.
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
@@ -268,13 +273,13 @@
 </div>
 <div id="washColor-procs-all">
   <div id="washColor,Color,float">
-  <dt><pre><span class="Keyword">func</span> <a href="#washColor%2CColor%2Cfloat"><span class="Identifier">washColor</span></a><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">;</span> <span class="Identifier">factor</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="FloatNumber">0.7</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Color</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+  <dt><pre><span class="Keyword">func</span> <a href="#washColor%2CColor%2Cfloat"><span class="Identifier">washColor</span></a><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">Color</span><span class="Other">;</span> <span class="Identifier">factor</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other">=</span> <span class="FloatNumber">0.2</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Color</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Increase brightness and move towards white (less saturation)
-    <a href="https://github.com/nimib-land/nimibex/tree/main/src/nimibex/chat_bubbles.nim#L6" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/nimib-land/nimibex/edit/devel/src/nimibex/chat_bubbles.nim#L6" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    Decrease the opacity by the factor
+    <a href="https://github.com/nimib-land/nimibex/tree/main/src/nimibex/chat_bubbles.nim#L7" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/nimib-land/nimibex/edit/devel/src/nimibex/chat_bubbles.nim#L7" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -288,7 +293,7 @@
   <dl class="item">
     <div id="dump-methods-all">
   <div id="dump.e,NbChatBubble">
-  <dt><pre><span class="Keyword">method</span> <a href="#dump.e%2CNbChatBubble"><span class="Identifier">dump</span></a><span class="Other">(</span><span class="Identifier">n`gensym79</span><span class="Other">:</span> <a href="#NbChatBubble"><span class="Identifier">NbChatBubble</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+  <dt><pre><span class="Keyword">method</span> <a href="#dump.e%2CNbChatBubble"><span class="Identifier">dump</span></a><span class="Other">(</span><span class="Identifier">n`gensym71</span><span class="Other">:</span> <a href="#NbChatBubble"><span class="Identifier">NbChatBubble</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
@@ -312,8 +317,8 @@
   <dd>
     
     
-    <a href="https://github.com/nimib-land/nimibex/tree/main/src/nimibex/chat_bubbles.nim#L55" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/nimib-land/nimibex/edit/devel/src/nimibex/chat_bubbles.nim#L55" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/nimib-land/nimibex/tree/main/src/nimibex/chat_bubbles.nim#L59" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/nimib-land/nimibex/edit/devel/src/nimibex/chat_bubbles.nim#L59" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -329,7 +334,7 @@
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-07-25 10:14:11 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-07-25 10:49:12 UTC</small>
       </div>
     </div>
   </div>
