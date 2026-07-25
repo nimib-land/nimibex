@@ -59,7 +59,7 @@ nbText: hlMd"""
 The colors objects are from [chroma](https://github.com/treeform/chroma). 
 The `color` is parameter can mean two things:
 - If you also pass `backgroundColor`, `color` will just set the border color of the chat bubble.
-- If you **don't** pass `backgroundColor`, `color` will be used for the border and a lighter and a less saturated version of it will be used as the background color.
+- If you **don't** pass `backgroundColor`, `color` will be used for the border and a more opaque version of it will be used as the background color.
 So unless you dislike the automatic background color, you only have to pass the `color` argument.
 
 Now we can have a chat between them:
