@@ -26,7 +26,7 @@ exampleCharacterLeft.chat("Cool! B-)")
 nbText: hlMd"""
 ## Usage
 To create a chat bubble you first have to create a `ChatBubbleCharacter` which will contain the
-information on how to render chat bubble (color, left/right, username, icon):
+information on how to render a chat bubble (color, left/right, username, icon):
 """
 
 nbCode:
@@ -57,7 +57,7 @@ nbCode:
 
 nbText: hlMd"""
 The colors objects are from [chroma](https://github.com/treeform/chroma). 
-The `color` is parameter can mean two things:
+The `color` parameter can mean two things:
 - If you also pass `backgroundColor`, `color` will just set the border color of the chat bubble.
 - If you **don't** pass `backgroundColor`, `color` will be used for the border and a more opaque version of it will be used as the background color.
 So unless you dislike the automatic background color, you only have to pass the `color` argument.
