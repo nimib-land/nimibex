@@ -1,11 +1,13 @@
-import std / [colors, strformat, sugar]
+import std / [strformat, sugar]
 import nimib
+import chroma
 
-export colors
+export chroma
 
-func washColor*(c: Color, factor: float = 0.7): Color =
-  ## Increase brightness and move towards white (less saturation)
-  c.mix(colWhite, (x: int, y: int) => int((1-factor) * x.float + factor * y.float))
+func washColor*(c: Color, factor: float = 0.2): Color =
+  ## Decrease the opacity by the factor
+  result = c
+  result.a *= factor
 
 type
   ChatBubbleCharacter* = object
@@ -29,7 +31,7 @@ newNbBlock(NbChatBubble):
     let flexDirection = if blk.left: "row" else: "row-reverse"
     let align = if blk.left: "left" else: "right"
     let wrapperStyles = &"display: flex; align-content: flex-start; align-items: center; gap: .5rem; flex-direction: {flexDirection}; margin-bottom: 0.5rem;"
-    let contentStyles = &"border: 1px solid {blk.color}; background-color: {blk.backgroundColor}; color: {blk.textColor}; margin-top: 0;  margin-bottom: 0;  max-width: 32rem;  border-radius: .75rem;  padding-top: 0; padding-bottom: 0; padding-left: .75rem; padding-right: .75rem;"
+    let contentStyles = &"border: 1px solid {blk.color.toHtmlRgba}; background-color: {blk.backgroundColor.toHtmlRgba}; color: {blk.textColor.toHtmlRgba}; margin-top: 0;  margin-bottom: 0;  max-width: 32rem;  border-radius: .75rem;  padding-top: 0; padding-bottom: 0; padding-left: .75rem; padding-right: .75rem;"
     let imageStyles = "height: 32px; width: auto; image-fit: contain;"
     let columnStyles = "display:flex; flex-direction: column;"
     withNewlines:
@@ -55,5 +57,5 @@ proc chatBubble*(nb: var Nb, text: string, name: string, image: string, left: bo
 template chat*(character: ChatBubbleCharacter, message: string) =
   nb.chatBubble(text=message, name=character.name, image=character.image, left=character.left, color=character.color, backgroundColor=character.backgroundColor, textColor=character.textColor)
 
-func newChatBubbleCharacter*(left = true, color: Color = colLightBlue, backgroundColor = color.washColor, textColor = colBlack, name = "", image = ""): ChatBubbleCharacter =
+func newChatBubbleCharacter*(left = true, color: Color = parseHtmlColor("lightskyblue"), backgroundColor = color.washColor, textColor = parseHtmlColor("black"), name = "", image = ""): ChatBubbleCharacter =
   ChatBubbleCharacter(left: left, color: color, backgroundColor: backgroundColor, textColor: textColor, name: name, image: image)

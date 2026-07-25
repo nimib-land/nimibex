@@ -11,6 +11,18 @@
         "sha1": "17ec440fdb89f8903db29a17898af590087d2b64"
       }
     },
+    "chroma": {
+      "version": "1.0.0",
+      "vcsRevision": "8bf4a0933ff405f83dc3a176199f528601e5b796",
+      "url": "https://github.com/treeform/chroma",
+      "downloadMethod": "git",
+      "dependencies": [
+        "nim"
+      ],
+      "checksums": {
+        "sha1": "76a12834f1b7e211e4232c1e13960accba6bd477"
+      }
+    },
     "parsetoml": {
       "version": "0.7.2",
       "vcsRevision": "d297f5a81be2472905d367aa675dcbbca6e7a5d2",
@@ -73,6 +85,20 @@
       ],
       "checksums": {
         "sha1": "08d25173ed4987eb7e65472dad37f3a2671783c0"
+      }
+    },
+    "nimibook": {
+      "version": "0.4.0",
+      "vcsRevision": "b02b02f3ddce3c5f765b1ef274115a689c6ecf9f",
+      "url": "https://github.com/pietroppeter/nimibook",
+      "downloadMethod": "git",
+      "dependencies": [
+        "nim",
+        "nimib",
+        "jsony"
+      ],
+      "checksums": {
+        "sha1": "5db15f36d37ea935e9f4bf4dd5ceff0110b274d8"
       }
     }
   },

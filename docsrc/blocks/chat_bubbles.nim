@@ -7,7 +7,7 @@ nbText: "# Chat Bubbles"
 nbText: "## Example"
 
 let exampleCharacterLeft = newChatBubbleCharacter(left=true, name="Demo user #1", image="https://raw.githubusercontent.com/nimib-land/assets/refs/heads/main/nimib_logo_white_bg_4k.png")
-let exampleCharacterRight = newChatBubbleCharacter(left=false, name="Demo user #2", color=colSpringGreen)
+let exampleCharacterRight = newChatBubbleCharacter(left=false, name="Demo user #2", color=parseHtmlColor("springgreen"))
 
 exampleCharacterLeft.chat("Hi there!")
 exampleCharacterLeft.chat("This is a **chat bubble**!")
@@ -46,9 +46,9 @@ It's not harder than that! There are multiple parameters you can assign to a `Ch
 nbCode:
   let rightCharacter = newChatBubbleCharacter(
     left = false, # put it on the right side
-    color = colSpringGreen, # set the color (border)
-    backgroundColor = colBeige, # set background color
-    textColor = colRed, # set text color
+    color = parseHtmlColor("springgreen"), # set the color (border)
+    backgroundColor = parseHtmlColor("beige"), # set background color
+    textColor = parseHtmlColor("red"), # set text color
     name = "Cool username", # set username that will be shown above chat bubbles
     image = "https://raw.githubusercontent.com/nimib-land/assets/refs/heads/main/nimib_logo_white_bg_4k.png" # set the icon besides the chat bubbles
   )
@@ -56,6 +56,7 @@ nbCode:
   rightCharacter.chat("This is the right person speaking!")
 
 nbText: hlMd"""
+The colors objects are from [chroma](https://github.com/treeform/chroma). 
 The `color` is parameter can mean two things:
 - If you also pass `backgroundColor`, `color` will just set the border color of the chat bubble.
 - If you **don't** pass `backgroundColor`, `color` will be used for the border and a lighter and a less saturated version of it will be used as the background color.
