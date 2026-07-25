@@ -6,7 +6,7 @@ nbText: "# Chat Bubbles"
 
 nbText: "## Example"
 
-let characterLeft = newChatBubbleCharacter(left=true, name="Demo user #1")
+let characterLeft = newChatBubbleCharacter(left=true, name="Demo user #1", image="https://raw.githubusercontent.com/nimib-land/assets/refs/heads/main/nimib_logo_white_bg_4k.png")
 let characterRight = newChatBubbleCharacter(left=false, name="Demo user #2", color=colSpringGreen)
 
 characterLeft.chat("Hi there!")
@@ -25,7 +25,8 @@ characterLeft.chat("Cool! B-)")
 
 nbText: hlMd"""
 ## Usage
-To create a chat bubble you first have to create a `ChatBubbleCharacter` which will contain the information on how to render chat bubble (color, left/right, username, icon)
+To create a chat bubble you first have to create a `ChatBubbleCharacter` which will contain the
+information on how to render chat bubble (color, left/right, username, icon).
 """
 
 # for raw calls, see the API documentation
