@@ -265,6 +265,24 @@ leftCharacter.chat(<span class="hljs-string">&quot;Bye!&quot;</span>)</code></pr
 <li>Use it to ask rhetoric questions on the user's behalf</li>
 <li>Use it to tell a story</li>
 </ul>
+<h3>Container block</h3>
+<p>You can also wrap other Nimib blocks in a chat bubble:</p>
+<pre><code class="nohighlight nim hljs">leftCharacter.chat:
+  nbText: <span class="hljs-string">&quot;Blocks in chat bubble example&quot;</span>
+  nbCode:
+    <span class="hljs-keyword">let</span> x = <span class="hljs-number">1</span>
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;x = &quot;</span>, x</code></pre>
+<div class="nimib-chat-bubble" style="display: flex; align-content: flex-start; align-items: center; gap: .5rem; flex-direction: row; margin-bottom: 0.5rem;">
+ <div style="display:flex; flex-direction: column;">
+  <div style="border: 1px solid rgba(135, 206, 250, 1.0); background-color: rgba(135, 206, 250, 0.2);  margin-top: 0;  margin-bottom: 0;  max-width: 32rem;  border-radius: .75rem;  padding-top: 0; padding-bottom: 0; padding-left: .75rem; padding-right: .75rem;">
+<p>Blocks in chat bubble example</p>
+<pre><code class="nohighlight nim hljs"><span class="hljs-keyword">let</span> x = <span class="hljs-number">1</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;x = &quot;</span>, x</code></pre>
+<pre class="nb-output">x = 1
+</pre>
+   </div>
+ </div>
+</div>
           </main>
 
           <nav class="nav-wrapper" aria-label="Page navigation">
