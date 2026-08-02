@@ -19,8 +19,7 @@ type
     # Text color must be optional so we can use the text color of the theme by default
     textColor*: Option[Color]
 
-newNbBlock(NbChatBubble):
-  text: string
+newNbBlock(NbChatBubble of NbContainer):
   name: string
   image: string
   left: bool
@@ -28,7 +27,7 @@ newNbBlock(NbChatBubble):
   backgroundColor: Color
   textColor: Option[Color]
   toHtml:
-    let text = markdownToHtml(blk.text)
+    let renderedContainer = nbContainerToHtml(blk, nb)
     let flexDirection = if blk.left: "row" else: "row-reverse"
     let align = if blk.left: "left" else: "right"
     let textColorStyle = if blk.textColor.isSome: &"color: {blk.textColor.get.toHtmlRgba};" else: ""
@@ -46,18 +45,21 @@ newNbBlock(NbChatBubble):
       if blk.name.len > 0:
         hlHtmlF"""<span style="text-align: {align}"><i>{blk.name}</i></span>"""
       hlHtmlF"""  <div style="{contentStyles}">"""
-      text
+      renderedContainer
       "   </div>"
       " </div>"
       "</div>"
 
 # Two overrides: manual and from a character
-proc chatBubble*(nb: var Nb, text: string, name: string, image: string, left: bool, color: Color, backgroundColor: Color, textColor: Option[Color]) =
-  let blk = newNbChatBubble(text=text, name=name, image=image, left=left, color=color, backgroundColor = backgroundColor, textColor = textColor)
+template chatBubble*(nb: var Nb, tname: string, timage: string, tleft: bool, tcolor: Color, tbackgroundColor: Color, ttextColor: Option[Color], body: untyped) =
+  let blk = newNbChatBubble(name=tname, image=timage, left=tleft, color=tcolor, backgroundColor = tbackgroundColor, textColor = ttextColor)
+  nb.withContainer(blk):
+    body
   nb.add blk
 
 template chat*(character: ChatBubbleCharacter, message: string) =
-  nb.chatBubble(text=message, name=character.name, image=character.image, left=character.left, color=character.color, backgroundColor=character.backgroundColor, textColor=character.textColor)
+  nb.chatBubble(tname=character.name, timage=character.image, tleft=character.left, tcolor=character.color, tbackgroundColor=character.backgroundColor, ttextColor=character.textColor):
+    nbText: message
 
 func newChatBubbleCharacter*(left = true, color: Color = parseHtmlColor("lightskyblue"), backgroundColor = color.washColor, textColor: Option[Color] | Color = none(Color), name = "", image = ""): ChatBubbleCharacter =
   when type(textColor) is Color:
