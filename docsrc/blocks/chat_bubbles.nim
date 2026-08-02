@@ -85,6 +85,7 @@ You can also wrap other Nimib blocks in a chat bubble:
 
 nbCode:
   leftCharacter.chat:
+    nbText: "Blocks in chat bubble example"
     nbCode:
       let x = 1
       echo "x = ", x
