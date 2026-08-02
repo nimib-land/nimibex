@@ -57,9 +57,14 @@ template chatBubble*(nb: var Nb, tname: string, timage: string, tleft: bool, tco
     body
   nb.add blk
 
-template chat*(character: ChatBubbleCharacter, message: string) =
+template chat*(character: ChatBubbleCharacter, body: untyped) =
   nb.chatBubble(tname=character.name, timage=character.image, tleft=character.left, tcolor=character.color, tbackgroundColor=character.backgroundColor, ttextColor=character.textColor):
+   body
+
+template chat*(character: ChatBubbleCharacter, message: string) =
+  character.chat:
     nbText: message
+
 
 func newChatBubbleCharacter*(left = true, color: Color = parseHtmlColor("lightskyblue"), backgroundColor = color.washColor, textColor: Option[Color] | Color = none(Color), name = "", image = ""): ChatBubbleCharacter =
   when type(textColor) is Color:

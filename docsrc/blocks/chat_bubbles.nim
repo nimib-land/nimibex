@@ -78,6 +78,15 @@ You can create as many characters as you like and use and mix them however you l
 Some example use-cases:
 - Use it to ask rhetoric questions on the user's behalf
 - Use it to tell a story
+
+### Container block
+You can also wrap other Nimib blocks in a chat bubble:
 """
+
+nbCode:
+  leftCharacter.chat:
+    nbCode:
+      let x = 1
+      echo "x = ", x
 
 nbSave()
