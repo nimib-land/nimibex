@@ -1,35 +1,38 @@
-import std / [colors, strformat, sugar]
+import std / [strformat, options]
 import nimib
+import chroma
 
-export colors
+export chroma
 
-func washColor*(c: Color, factor: float = 0.7): Color =
-  ## Increase brightness and move towards white (less saturation)
-  c.mix(colWhite, (x: int, y: int) => int((1-factor) * x.float + factor * y.float))
+func washColor*(c: Color, factor: float = 0.2): Color =
+  ## Decrease the opacity by the factor
+  result = c
+  result.a *= factor
 
 type
   ChatBubbleCharacter* = object
     name*: string
     image*: string
     left*: bool
-    borderColor*: Color
+    color*: Color
     backgroundColor*: Color
-    textColor*: Color
+    # Text color must be optional so we can use the text color of the theme by default
+    textColor*: Option[Color]
 
-newNbBlock(NbChatBubble):
-  text: string
+newNbBlock(NbChatBubble of NbContainer):
   name: string
   image: string
   left: bool
-  borderColor: Color
+  color: Color
   backgroundColor: Color
-  textColor: Color
+  textColor: Option[Color]
   toHtml:
-    let text = markdownToHtml(blk.text)
+    let renderedContainer = nbContainerToHtml(blk, nb)
     let flexDirection = if blk.left: "row" else: "row-reverse"
     let align = if blk.left: "left" else: "right"
+    let textColorStyle = if blk.textColor.isSome: &"color: {blk.textColor.get.toHtmlRgba};" else: ""
     let wrapperStyles = &"display: flex; align-content: flex-start; align-items: center; gap: .5rem; flex-direction: {flexDirection}; margin-bottom: 0.5rem;"
-    let contentStyles = &"border: 1px solid {blk.borderColor}; background-color: {blk.backgroundColor}; color: {blk.textColor}; margin-top: 0;  margin-bottom: 0;  max-width: 32rem;  border-radius: .75rem;  padding-top: 0; padding-bottom: 0; padding-left: .75rem; padding-right: .75rem;"
+    let contentStyles = &"border: 1px solid {blk.color.toHtmlRgba}; background-color: {blk.backgroundColor.toHtmlRgba}; {textColorStyle} margin-top: 0;  margin-bottom: 0;  max-width: 32rem;  border-radius: .75rem;  padding-top: 0; padding-bottom: 0; padding-left: .75rem; padding-right: .75rem;"
     let imageStyles = "height: 32px; width: auto; image-fit: contain;"
     let columnStyles = "display:flex; flex-direction: column;"
     withNewlines:
@@ -42,18 +45,28 @@ newNbBlock(NbChatBubble):
       if blk.name.len > 0:
         hlHtmlF"""<span style="text-align: {align}"><i>{blk.name}</i></span>"""
       hlHtmlF"""  <div style="{contentStyles}">"""
-      text
+      renderedContainer
       "   </div>"
       " </div>"
       "</div>"
 
 # Two overrides: manual and from a character
-proc chatBubble*(nb: var Nb, text: string, name: string, image: string, left: bool, borderColor: Color, backgroundColor: Color, textColor: Color) =
-  let blk = newNbChatBubble(text=text, name=name, image=image, left=left, borderColor=borderColor, backgroundColor = backgroundColor, textColor = textColor)
+template chatBubble*(nb: var Nb, tname: string, timage: string, tleft: bool, tcolor: Color, tbackgroundColor: Color, ttextColor: Option[Color], body: untyped) =
+  let blk = newNbChatBubble(name=tname, image=timage, left=tleft, color=tcolor, backgroundColor = tbackgroundColor, textColor = ttextColor)
+  nb.withContainer(blk):
+    body
   nb.add blk
 
-template chat*(character: ChatBubbleCharacter, message: string) =
-  nb.chatBubble(text=message, name=character.name, image=character.image, left=character.left, borderColor=character.borderColor, backgroundColor=character.backgroundColor, textColor=character.textColor)
+template chat*(character: ChatBubbleCharacter, body: untyped) =
+  nb.chatBubble(tname=character.name, timage=character.image, tleft=character.left, tcolor=character.color, tbackgroundColor=character.backgroundColor, ttextColor=character.textColor):
+   body
 
-func newChatBubbleCharacter*(left: bool, borderColor: Color = colLightBlue, backgroundColor = borderColor.washColor, textColor = colBlack, name = "", image = ""): ChatBubbleCharacter =
-  ChatBubbleCharacter(left: left, borderColor: borderColor, backgroundColor: backgroundColor, textColor: textColor, name: name, image: image)
+template chat*(character: ChatBubbleCharacter, message: string) =
+  character.chat:
+    nbText: message
+
+
+func newChatBubbleCharacter*(left = true, color: Color = parseHtmlColor("lightskyblue"), backgroundColor = color.washColor, textColor: Option[Color] | Color = none(Color), name = "", image = ""): ChatBubbleCharacter =
+  when type(textColor) is Color:
+    let textColor = some(textColor)
+  ChatBubbleCharacter(left: left, color: color, backgroundColor: backgroundColor, textColor: textColor, name: name, image: image)
