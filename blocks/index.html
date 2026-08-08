@@ -126,7 +126,12 @@
       </script>
       <div id="content" class="content">
           <main>
-              
+              <h1>Blocks</h1>
+<p>This section lists and documents all blocks that are available in Nimibex.
+To import a block you have to explicitly import its submodule.
+We have deliberately chosen to not provide a way to import all modules because
+it would pollute the Nimib renderer and could cause unexpected behavior. This is the correct way to import the chat bubble block:</p>
+<pre><code class="nohighlight nim hljs"><span class="hljs-keyword">import</span> nimibex / chat_bubbles</code></pre>
           </main>
 
           <nav class="nav-wrapper" aria-label="Page navigation">

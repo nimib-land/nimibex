@@ -32,12 +32,16 @@
 <dl><dt><a name="chat" href="#chat"><span>chat:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="chat_bubbles: template chat(character: ChatBubbleCharacter; message: string)" href="chat_bubbles.html#chat.t%2CChatBubbleCharacter%2Cstring">chat_bubbles: template chat(character: ChatBubbleCharacter; message: string)</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="chat_bubbles: template chat(character: ChatBubbleCharacter; body: untyped)" href="chat_bubbles.html#chat.t%2CChatBubbleCharacter%2Cuntyped">chat_bubbles: template chat(character: ChatBubbleCharacter; body: untyped)</a></li>
           </ul></dd>
 <dt><a name="chatBubble" href="#chatBubble"><span>chatBubble:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="chat_bubbles: proc chatBubble(nb: var Nb; text: string; name: string; image: string; left: bool;
-           borderColor: Color; backgroundColor: Color; textColor: Color)" href="chat_bubbles.html#chatBubble%2CNb%2Cstring%2Cstring%2Cstring%2Cbool%2CColor%2CColor%2CColor">chat_bubbles: proc chatBubble(nb: var Nb; text: string; name: string; image: string; left: bool;
-           borderColor: Color; backgroundColor: Color; textColor: Color)</a></li>
+          data-doc-search-tag="chat_bubbles: template chatBubble(nb: var Nb; tname: string; timage: string; tleft: bool;
+           tcolor: Color; tbackgroundColor: Color; ttextColor: Option[Color];
+           body: untyped)" href="chat_bubbles.html#chatBubble.t%2CNb%2Cstring%2Cstring%2Cbool%2CColor%2CColor%2COption%5BColor%5D%2Cuntyped">chat_bubbles: template chatBubble(nb: var Nb; tname: string; timage: string; tleft: bool;
+           tcolor: Color; tbackgroundColor: Color; ttextColor: Option[Color];
+           body: untyped)</a></li>
           </ul></dd>
 <dt><a name="ChatBubbleCharacter" href="#ChatBubbleCharacter"><span>ChatBubbleCharacter:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -45,7 +49,7 @@
           </ul></dd>
 <dt><a name="dump" href="#dump"><span>dump:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="chat_bubbles: method dump(n`gensym79: NbChatBubble): string" href="chat_bubbles.html#dump.e%2CNbChatBubble">chat_bubbles: method dump(n`gensym79: NbChatBubble): string</a></li>
+          data-doc-search-tag="chat_bubbles: method dump(n`gensym71: NbChatBubble): string" href="chat_bubbles.html#dump.e%2CNbChatBubble">chat_bubbles: method dump(n`gensym71: NbChatBubble): string</a></li>
           </ul></dd>
 <dt><a name="NbChatBubble" href="#NbChatBubble"><span>NbChatBubble:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -57,37 +61,41 @@
           </ul></dd>
 <dt><a name="newChatBubbleCharacter" href="#newChatBubbleCharacter"><span>newChatBubbleCharacter:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="chat_bubbles: proc newChatBubbleCharacter(left: bool; borderColor: Color = colLightBlue;
-                       backgroundColor = borderColor.washColor;
-                       textColor = colBlack; name = &quot;&quot;; image = &quot;&quot;): ChatBubbleCharacter" href="chat_bubbles.html#newChatBubbleCharacter%2Cbool%2CColor%2Cstring%2Cstring">chat_bubbles: proc newChatBubbleCharacter(left: bool; borderColor: Color = colLightBlue;
-                       backgroundColor = borderColor.washColor;
-                       textColor = colBlack; name = &quot;&quot;; image = &quot;&quot;): ChatBubbleCharacter</a></li>
+          data-doc-search-tag="chat_bubbles: proc newChatBubbleCharacter(left = true;
+                       color: Color = parseHtmlColor(&quot;lightskyblue&quot;);
+                       backgroundColor = color.washColor;
+                       textColor: Option[Color] | Color = none(Color);
+                       name = &quot;&quot;; image = &quot;&quot;): ChatBubbleCharacter" href="chat_bubbles.html#newChatBubbleCharacter%2CColor%2Cstring%2Cstring">chat_bubbles: proc newChatBubbleCharacter(left = true;
+                       color: Color = parseHtmlColor(&quot;lightskyblue&quot;);
+                       backgroundColor = color.washColor;
+                       textColor: Option[Color] | Color = none(Color);
+                       name = &quot;&quot;; image = &quot;&quot;): ChatBubbleCharacter</a></li>
           </ul></dd>
 <dt><a name="newNbChatBubble" href="#newNbChatBubble"><span>newNbChatBubble:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="chat_bubbles: proc newNbChatBubble(text: string = default(typedesc[string]);
+          data-doc-search-tag="chat_bubbles: proc newNbChatBubble(blocks: seq[NbBlock] = default(typedesc[seq[NbBlock]]);
                 name: string = default(typedesc[string]);
                 image: string = default(typedesc[string]);
                 left: bool = default(typedesc[bool]);
-                borderColor: Color = default(typedesc[Color]);
+                color: Color = default(typedesc[Color]);
                 backgroundColor: Color = default(typedesc[Color]);
-                textColor: Color = default(typedesc[Color])): NbChatBubble" href="chat_bubbles.html#newNbChatBubble%2Cstring%2Cstring%2Cstring%2Cbool%2CColor%2CColor%2CColor">chat_bubbles: proc newNbChatBubble(text: string = default(typedesc[string]);
+                textColor: Option[Color] = default(typedesc[Option[Color]])): NbChatBubble" href="chat_bubbles.html#newNbChatBubble%2Cseq%5BNbBlock%5D%2Cstring%2Cstring%2Cbool%2CColor%2CColor%2COption%5BColor%5D">chat_bubbles: proc newNbChatBubble(blocks: seq[NbBlock] = default(typedesc[seq[NbBlock]]);
                 name: string = default(typedesc[string]);
                 image: string = default(typedesc[string]);
                 left: bool = default(typedesc[bool]);
-                borderColor: Color = default(typedesc[Color]);
+                color: Color = default(typedesc[Color]);
                 backgroundColor: Color = default(typedesc[Color]);
-                textColor: Color = default(typedesc[Color])): NbChatBubble</a></li>
+                textColor: Option[Color] = default(typedesc[Option[Color]])): NbChatBubble</a></li>
           </ul></dd>
 <dt><a name="washColor" href="#washColor"><span>washColor:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="chat_bubbles: proc washColor(c: Color; factor: float = 0.7): Color" href="chat_bubbles.html#washColor%2CColor%2Cfloat">chat_bubbles: proc washColor(c: Color; factor: float = 0.7): Color</a></li>
+          data-doc-search-tag="chat_bubbles: proc washColor(c: Color; factor: float = 0.2): Color" href="chat_bubbles.html#washColor%2CColor%2Cfloat">chat_bubbles: proc washColor(c: Color; factor: float = 0.2): Color</a></li>
           </ul></dd>
 </dl>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-07-24 18:36:20 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-08-08 13:41:30 UTC</small>
       </div>
     </div>
   </div>
